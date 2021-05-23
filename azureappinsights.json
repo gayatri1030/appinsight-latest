@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "app_insight_name": {
+      "type": "string"
+    },
+    "app_insight_location": {
+      "type": "string"
+    },
+    "app_insight_type": {
+      "type": "string"
+    },
+    "flow_type": {
+      "type": "string"
+    },
+    "request_source": {
+      "type": "string"
+    },
+    "ingestion_mode": {
+      "type": "string"
+    },
+    "publicNetworkAccessForIngestion": {
+      "type": "string"
+    },
+    "publicNetworkAccessForQuery": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2020-02-02-preview",
+      "name": "[parameters('app_insight_name')]",
+      "location": "[parameters('app_insight_location')]",
+      "properties": {
+        "Application_Type": "[parameters('app_insight_type')]",
+        "Flow_Type": "[parameters('flow_type')]",
+        "Request_Source": "[parameters('request_source')]",
+        "IngestionMode": "[parameters('ingestion_mode')]",
+        "publicNetworkAccessForIngestion": "[parameters('publicNetworkAccessForIngestion')]",
+        "publicNetworkAccessForQuery": "[parameters('publicNetworkAccessForQuery')]"
+      }
+
+    }
+  ],
+  "outputs": {
+    "appInsightsID": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Insights/components', parameters('app_insight_name'))]"
+
+    }
+  }
+
+}
